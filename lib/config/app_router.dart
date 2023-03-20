@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecom/models/category_model.dart';
+import 'package:flutter_ecom/models/product_model.dart';
 import 'package:flutter_ecom/screen/screens.dart';
 
 class AppRouter {
@@ -7,14 +9,12 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return HomeScreen.route();
-      case HomeScreen.routeName:
-        return HomeScreen.route();
       case CartScreen.routeName:
         return CartScreen.route();
       case CatalogScreen.routeName:
-        return CatalogScreen.route();
+        return CatalogScreen.route(category: settings.arguments as Category);
       case ProductScreen.routeName:
-        return ProductScreen.route();
+        return ProductScreen.route(product: settings.arguments as Product);
       case WishlistScreen.routeName:
         return WishlistScreen.route();
 

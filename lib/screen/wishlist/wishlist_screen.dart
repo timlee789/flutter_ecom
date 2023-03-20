@@ -17,7 +17,7 @@ class WishlistScreen extends StatelessWidget {
     // );
     return const Scaffold(
       appBar: CustomAppBar(title: 'Wishlist'),
-      bottomNavigationBar: customnavbar(),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }

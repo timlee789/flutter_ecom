@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class customnavbar extends StatelessWidget {
-  const customnavbar({
+class CustomNavBar extends StatelessWidget {
+  const CustomNavBar({
     Key? key,
   }) : super(key: key);
 

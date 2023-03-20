@@ -17,7 +17,7 @@ class CartScreen extends StatelessWidget {
     // );
     return const Scaffold(
       appBar: CustomAppBar(title: 'Cart'),
-      bottomNavigationBar: customnavbar(),
+      bottomNavigationBar: CustomNavBar(),
     );
   }
 }
