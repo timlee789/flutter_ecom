@@ -34,20 +34,20 @@ class ProductScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  context.read<WishlistBloc>().add(AddWishlistProduct(product));
-                  final snackBar =
-                      SnackBar(content: Text('Add to your wishlist!'));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
-              );
-            }),
+            // BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
+            //   return IconButton(
+            //     onPressed: () {
+            //       context.read<WishlistBloc>().add(AddWishlistProduct(product));
+            //       final snackBar =
+            //           SnackBar(content: Text('Add to your wishlist!'));
+            //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            //     },
+            //     icon: Icon(
+            //       Icons.favorite,
+            //       color: Colors.white,
+            //     ),
+            //   );
+            // }),
             ElevatedButton(
               onPressed: () {},
               child: Text('ADD TO CART',
