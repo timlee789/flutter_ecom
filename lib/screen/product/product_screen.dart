@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecom/models/product_model.dart';
 
+import '../../blocs/cart/cart_bloc.dart';
 import '../../blocs/wishlist/wishlist_bloc.dart';
 import '../../widgets/widgets.dart';
 
@@ -34,24 +35,31 @@ class ProductScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            // BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
-            //   return IconButton(
-            //     onPressed: () {
-            //       context.read<WishlistBloc>().add(AddWishlistProduct(product));
-            //       final snackBar =
-            //           SnackBar(content: Text('Add to your wishlist!'));
-            //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            //     },
-            //     icon: Icon(
-            //       Icons.favorite,
-            //       color: Colors.white,
-            //     ),
-            //   );
-            // }),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('ADD TO CART',
-                  style: Theme.of(context).textTheme.headline3!),
+            BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  context.read<WishlistBloc>().add(AddWishlistProduct(product));
+                  final snackBar =
+                      SnackBar(content: Text('Add to your wishlist!'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.white,
+                ),
+              );
+            }),
+            BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () {
+                    context.read<CartBloc>().add(CartProductAdded(product));
+                    Navigator.pushNamed(context, '/cart');
+                  },
+                  child: Text('ADD TO CART',
+                      style: Theme.of(context).textTheme.headline3!),
+                );
+              },
             )
           ]),
         ),
