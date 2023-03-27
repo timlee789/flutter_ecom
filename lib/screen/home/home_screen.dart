@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecom/models/models.dart';
+import '../../blocs/category/category_bloc.dart';
 import '../../widgets/widgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -18,20 +20,34 @@ class HomeScreen extends StatelessWidget {
       appBar: CustomAppBar(title: 'LocalFlyer'),
       bottomNavigationBar: CustomNavBar(),
       body: Column(children: [
-        CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            aspectRatio: 1.5,
-            viewportFraction: 0.9,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.height,
-          ),
-          items: Category.categories
-              .map((category) => HeroCarouselCard(
-                    category: category,
-                    product: null,
-                  ))
-              .toList(),
+        BlocBuilder<CategoryBloc, CategoryState>(
+          builder: (context, state) {
+            if (state is CategoryLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is CategoryLoaded) {
+              return CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 1.5,
+                  viewportFraction: 0.9,
+                  enlargeCenterPage: true,
+                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+                ),
+                //items: state.categories
+                items: state.categories
+                    .map((category) => HeroCarouselCard(
+                          category: category,
+                          product: null,
+                        ))
+                    .toList(),
+              );
+            } else {
+              return Text('Something went wrong');
+            }
+          },
         ),
         const SectionTitle(title: 'RECOMMENDED'),
         ProductCarousel(
